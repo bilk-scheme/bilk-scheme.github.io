@@ -18,6 +18,11 @@ title="Copy code"
 &lt;li&gt;&lt;strong&gt;Paredit&lt;/strong&gt; — structural editing that keeps parentheses balanced&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Multi-line input&lt;/strong&gt; — automatic detection of incomplete expressions&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Tab completion&lt;/strong&gt; — completes Scheme identifiers and REPL commands&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Interactive tab completion menu&lt;/strong&gt; — visual popup for ambiguous completions; Tab/Shift-Tab to cycle, Enter to accept, Escape to cancel&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Context-sensitive completion&lt;/strong&gt; — completes identifiers, file paths inside strings, library names in &lt;code&gt;import&lt;/code&gt; forms, and arguments for &lt;code&gt;,load&lt;/code&gt;, &lt;code&gt;,theme&lt;/code&gt;, and &lt;code&gt;,reload&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Session checkpoints&lt;/strong&gt; — save and restore REPL state with &lt;code&gt;,checkpoint&lt;/code&gt; and &lt;code&gt;,revert&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Datum comment highlighting&lt;/strong&gt; — &lt;code&gt;#;&lt;/code&gt; styles the entire commented expression&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Auto-indentation&lt;/strong&gt; — smart indentation for &lt;code&gt;def*&lt;/code&gt;, &lt;code&gt;let*&lt;/code&gt;, &lt;code&gt;lambda*&lt;/code&gt;, &lt;code&gt;cond&lt;/code&gt;, &lt;code&gt;begin&lt;/code&gt;, &lt;code&gt;when&lt;/code&gt;, &lt;code&gt;unless&lt;/code&gt;, and more&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;History&lt;/strong&gt; — persistent across sessions, saved to &lt;code&gt;~/.bilk_history&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Emacs keybindings&lt;/strong&gt; — Ctrl-A/E, Ctrl-B/F, Ctrl-K, Ctrl-U, Alt-Left/Right&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Library watching&lt;/strong&gt; — in package projects, rebuilds stale libraries in the background&lt;/li&gt;
@@ -80,6 +85,30 @@ title="Copy code"
 &lt;td&gt;&lt;code&gt;,paredit&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;Toggle structural editing mode&lt;/td&gt;
 &lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,clear&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Clear terminal and scrollback&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,checkpoint [name]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Save REPL session state to FASL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,revert [name]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Restore a saved checkpoint&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,checkpoints&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all available checkpoints&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,save-session &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Save all checkpoints to a binary file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,load-session &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Load checkpoints from a binary file&lt;/td&gt;
+&lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2&gt;Paredit mode&lt;span class="hx:absolute hx:-mt-20" id="paredit-mode"&gt;&lt;/span&gt;
@@ -129,6 +158,47 @@ title="Copy code"
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;p&gt;S-expression navigation:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Key&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Alt-F&lt;/td&gt;
+&lt;td&gt;Move forward by s-expression&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Alt-B&lt;/td&gt;
+&lt;td&gt;Move backward by s-expression&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Alt-U&lt;/td&gt;
+&lt;td&gt;Move up out of the current list&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Alt-N&lt;/td&gt;
+&lt;td&gt;Move forward out of the enclosing list&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Alt-D&lt;/td&gt;
+&lt;td&gt;Descend into the next list&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Alt-P&lt;/td&gt;
+&lt;td&gt;Move backward into the enclosing list&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Indentation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Tab&lt;/strong&gt; indents the current line (when not completing an identifier)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Shift-Tab&lt;/strong&gt; re-indents all lines&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Enter&lt;/strong&gt; auto-indents the new line and lines below it&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;Toggle paredit on or off with &lt;code&gt;,paredit&lt;/code&gt;.&lt;/p&gt;
 &lt;h2&gt;Themes&lt;span class="hx:absolute hx:-mt-20" id="themes"&gt;&lt;/span&gt;
 &lt;a href="#themes" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Switch between built-in themes or load a custom theme file:&lt;/p&gt;
@@ -191,7 +261,15 @@ title="Copy code"
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Tab&lt;/td&gt;
-&lt;td&gt;Complete identifier or command&lt;/td&gt;
+&lt;td&gt;Complete identifier or command; indent current line (paredit)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Shift-Tab&lt;/td&gt;
+&lt;td&gt;Re-indent all lines (paredit)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-Alt-F / Ctrl-Alt-B&lt;/td&gt;
+&lt;td&gt;Move forward/backward by s-expression (paredit)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;Ctrl-D&lt;/td&gt;
@@ -282,7 +360,308 @@ richer highlighting than regex-based grammars. Token types include:&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;string&lt;/code&gt;, &lt;code&gt;number&lt;/code&gt;, &lt;code&gt;comment&lt;/code&gt; — literals&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Token modifiers include &lt;code&gt;definition&lt;/code&gt; (for binding sites) and &lt;code&gt;readonly&lt;/code&gt; (for
-immutable bindings).&lt;/p&gt;</description></item><item><title>Debugger</title><link>https://bilk-scheme.github.io/docs/tools/debugger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/debugger/</guid><description>
+immutable bindings).&lt;/p&gt;</description></item><item><title>Remote REPL</title><link>https://bilk-scheme.github.io/docs/tools/remote-repl/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/remote-repl/</guid><description>
+&lt;p&gt;Bilk provides a remote REPL that lets you run a persistent Scheme session on one
+machine and interact with it from another. Three subcommands work together:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;bilk serve&lt;/code&gt;&lt;/strong&gt; — start a REPL server&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;bilk attach&lt;/code&gt;&lt;/strong&gt; — connect to a running server&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;bilk connect&lt;/code&gt;&lt;/strong&gt; — SSH bootstrap: start a server on a remote host and auto-attach&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;&lt;code&gt;bilk serve&lt;/code&gt;&lt;span class="hx:absolute hx:-mt-20" id="bilk-serve"&gt;&lt;/span&gt;
+&lt;a href="#bilk-serve" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Start a persistent REPL server:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk serve
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk serve --port &lt;span class="m"&gt;9000&lt;/span&gt; --name my-session --auto-checkpoint&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The server holds a live Scheme instance and accepts client connections over TCP.
+It stays alive when clients disconnect, so long-running computations and
+accumulated state are preserved.&lt;/p&gt;
+&lt;p&gt;On startup the server prints a machine-readable line to stdout:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;BILK CONNECT &amp;lt;port&amp;gt; &amp;lt;base64-key&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;This line is consumed by &lt;code&gt;bilk connect&lt;/code&gt; for SSH bootstrapping. The encryption
+key is generated fresh for each session.&lt;/p&gt;
+&lt;h3&gt;Options&lt;span class="hx:absolute hx:-mt-20" id="options"&gt;&lt;/span&gt;
+&lt;a href="#options" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Flag&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--port PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;7890&lt;/td&gt;
+&lt;td&gt;TCP port to listen on&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--name NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;quot;default&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Session name (used for display and checkpoint naming)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--bind ADDRESS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;127.0.0.1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Network address to bind to&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--insecure&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;off&lt;/td&gt;
+&lt;td&gt;Disable encryption (only allowed on loopback)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--auto-checkpoint&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;off&lt;/td&gt;
+&lt;td&gt;Automatically checkpoint state on client disconnect&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--session-timeout SECS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;86400 (1 day)&lt;/td&gt;
+&lt;td&gt;Session timeout in seconds&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Security&lt;span class="hx:absolute hx:-mt-20" id="security"&gt;&lt;/span&gt;
+&lt;a href="#security" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;By default, all traffic is encrypted with &lt;strong&gt;ChaCha20-Poly1305&lt;/strong&gt; authenticated
+encryption. A 256-bit key is generated per session and shared with the client
+via the &lt;code&gt;BILK CONNECT&lt;/code&gt; line (or the &lt;code&gt;BILK_KEY&lt;/code&gt; environment variable for
+&lt;code&gt;bilk attach&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;The handshake performs &lt;strong&gt;mutual authentication&lt;/strong&gt;: the server challenges the
+client with a random nonce, the client proves knowledge of the key via
+HMAC-SHA256, and the server proves back. Both sides reject unauthenticated
+peers.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;--insecure&lt;/code&gt; flag disables encryption but is only allowed when binding to a
+loopback address (&lt;code&gt;127.0.0.1&lt;/code&gt; or &lt;code&gt;::1&lt;/code&gt;).&lt;/p&gt;
+&lt;h2&gt;&lt;code&gt;bilk attach&lt;/code&gt;&lt;span class="hx:absolute hx:-mt-20" id="bilk-attach"&gt;&lt;/span&gt;
+&lt;a href="#bilk-attach" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Connect to a running server:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk attach localhost:7890
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk attach 192.168.1.10:9000 --theme light --paredit&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The client provides the full local REPL experience — syntax highlighting,
+rainbow parentheses, paredit, tab completion, multi-line editing, and history —
+with zero-latency keystrokes. Only complete expressions are sent to the server
+for evaluation.&lt;/p&gt;
+&lt;p&gt;The encryption key is read from the &lt;code&gt;BILK_KEY&lt;/code&gt; environment variable (set
+automatically by &lt;code&gt;bilk connect&lt;/code&gt;).&lt;/p&gt;
+&lt;h3&gt;Options&lt;span class="hx:absolute hx:-mt-20" id="options-1"&gt;&lt;/span&gt;
+&lt;a href="#options-1" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Flag&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--theme THEME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;dark&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Color theme: &lt;code&gt;dark&lt;/code&gt;, &lt;code&gt;light&lt;/code&gt;, &lt;code&gt;none&lt;/code&gt;, or a file path&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--paredit&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;off&lt;/td&gt;
+&lt;td&gt;Enable paredit structural editing&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Client-local vs server-side commands&lt;span class="hx:absolute hx:-mt-20" id="client-local-vs-server-side-commands"&gt;&lt;/span&gt;
+&lt;a href="#client-local-vs-server-side-commands" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;REPL comma commands are split between client and server:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Client-local&lt;/strong&gt; (handled instantly, no server round-trip):&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,quit&lt;/code&gt; / &lt;code&gt;,q&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Disconnect and exit&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,help&lt;/code&gt; / &lt;code&gt;,h&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Show available commands&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,paredit&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Toggle structural editing&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,theme &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Switch color theme&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,clear&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Clear terminal and scrollback&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Server-side&lt;/strong&gt; (sent to the server for execution):&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,checkpoint [name]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Save a named session checkpoint&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,revert [name]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Restore a saved checkpoint&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,checkpoints&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all available checkpoints&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,save-session &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Save all checkpoints to a file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,load-session &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Load checkpoints from a file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,env&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List global bindings&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,libs&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List loaded libraries&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,exports &amp;lt;lib&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Show library exports&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,deps &amp;lt;lib&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Show library dependencies&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,reload &amp;lt;lib&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Reload a library&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,load &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Load a Scheme file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;&lt;code&gt;bilk connect&lt;/code&gt;&lt;span class="hx:absolute hx:-mt-20" id="bilk-connect"&gt;&lt;/span&gt;
+&lt;a href="#bilk-connect" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;SSH bootstrap: start a server on a remote host and automatically attach:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk connect user@host
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk connect user@host --serve-port &lt;span class="m"&gt;9000&lt;/span&gt; --auto-checkpoint --name dev
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk connect user@host -p &lt;span class="m"&gt;2222&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;This spawns an SSH session to the remote host, runs &lt;code&gt;bilk serve&lt;/code&gt; there, reads
+the &lt;code&gt;BILK CONNECT&lt;/code&gt; line from the remote process, and auto-attaches as a local
+client. The encryption key is passed through the SSH channel and never touches
+the network in plaintext.&lt;/p&gt;
+&lt;h3&gt;Options&lt;span class="hx:absolute hx:-mt-20" id="options-2"&gt;&lt;/span&gt;
+&lt;a href="#options-2" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Flag&lt;/th&gt;
+&lt;th&gt;Default&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--port PORT&lt;/code&gt; / &lt;code&gt;-p PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;22&lt;/td&gt;
+&lt;td&gt;SSH port on the remote host&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--serve-port PORT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;7890&lt;/td&gt;
+&lt;td&gt;Port for &lt;code&gt;bilk serve&lt;/code&gt; on the remote&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--auto-checkpoint&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;off&lt;/td&gt;
+&lt;td&gt;Enable auto-checkpoint on disconnect&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--name NAME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;&amp;quot;default&amp;quot;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Session name on the remote&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;--session-timeout SECS&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;86400 (1 day)&lt;/td&gt;
+&lt;td&gt;Session timeout on the remote&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The &lt;code&gt;--insecure&lt;/code&gt; and &lt;code&gt;--bind&lt;/code&gt; flags are never forwarded to the remote server.&lt;/p&gt;
+&lt;h2&gt;Typical workflow&lt;span class="hx:absolute hx:-mt-20" id="typical-workflow"&gt;&lt;/span&gt;
+&lt;a href="#typical-workflow" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Start a session on a remote dev machine&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk connect dev@build-server --auto-checkpoint --name experiment
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# ... work interactively, define functions, load libraries ...&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Disconnect (Ctrl-D or ,quit) — state is auto-checkpointed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Later, reconnect to the same server&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk attach build-server:7890
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Revert to a previous checkpoint if needed&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;,revert experiment&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item><item><title>Debugger</title><link>https://bilk-scheme.github.io/docs/tools/debugger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/debugger/</guid><description>
 &lt;p&gt;Bilk Scheme includes a Debug Adapter Protocol (DAP) server for step-through debugging.&lt;/p&gt;
 &lt;h2&gt;Starting a debug session&lt;span class="hx:absolute hx:-mt-20" id="starting-a-debug-session"&gt;&lt;/span&gt;
 &lt;a href="#starting-a-debug-session" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
