@@ -1,0 +1,726 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Bilk Scheme – Tool Guide</title><link>https://bilk-scheme.github.io/docs/tools/</link><description>Recent content in Tool Guide on Bilk Scheme</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><atom:link href="https://bilk-scheme.github.io/docs/tools/index.xml" rel="self" type="application/rss+xml"/><item><title>REPL</title><link>https://bilk-scheme.github.io/docs/tools/repl/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/repl/</guid><description>
+&lt;p&gt;Start the REPL by running &lt;code&gt;bilk&lt;/code&gt; with no arguments:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Features&lt;span class="hx:absolute hx:-mt-20" id="features"&gt;&lt;/span&gt;
+&lt;a href="#features" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Syntax highlighting&lt;/strong&gt; with two built-in themes (dark and light)&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rainbow parentheses&lt;/strong&gt; — depth-based color cycling for matching parens&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Paredit&lt;/strong&gt; — structural editing that keeps parentheses balanced&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Multi-line input&lt;/strong&gt; — automatic detection of incomplete expressions&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tab completion&lt;/strong&gt; — completes Scheme identifiers and REPL commands&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;History&lt;/strong&gt; — persistent across sessions, saved to &lt;code&gt;~/.bilk_history&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Emacs keybindings&lt;/strong&gt; — Ctrl-A/E, Ctrl-B/F, Ctrl-K, Ctrl-U, Alt-Left/Right&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Library watching&lt;/strong&gt; — in package projects, rebuilds stale libraries in the background&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;REPL commands&lt;span class="hx:absolute hx:-mt-20" id="repl-commands"&gt;&lt;/span&gt;
+&lt;a href="#repl-commands" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Commands are prefixed with a comma:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,help&lt;/code&gt; / &lt;code&gt;,h&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Show available commands&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,quit&lt;/code&gt; / &lt;code&gt;,q&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Exit the REPL&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,load &amp;lt;file&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Load and evaluate a Scheme file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,env&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all bound names in the global environment&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,libs&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List loaded/registered libraries&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,available&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all discoverable libraries on disk&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,exports &amp;lt;lib&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Show exports of a library, e.g. &lt;code&gt;,exports (scheme base)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,deps &amp;lt;lib&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Show dependency tree, e.g. &lt;code&gt;,deps (srfi 1)&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,reload &amp;lt;lib&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Reload a library from source&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,build&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Trigger library rebuild&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,theme &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Switch theme: &lt;code&gt;dark&lt;/code&gt;, &lt;code&gt;light&lt;/code&gt;, &lt;code&gt;none&lt;/code&gt;, or a file path&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;,paredit&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Toggle structural editing mode&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;Paredit mode&lt;span class="hx:absolute hx:-mt-20" id="paredit-mode"&gt;&lt;/span&gt;
+&lt;a href="#paredit-mode" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Paredit keeps parentheses balanced automatically. When enabled:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Typing &lt;code&gt;(&lt;/code&gt; inserts &lt;code&gt;()&lt;/code&gt; and places the cursor inside&lt;/li&gt;
+&lt;li&gt;Typing &lt;code&gt;)&lt;/code&gt; moves past the closing paren instead of inserting&lt;/li&gt;
+&lt;li&gt;Backspace will not delete an unmatched paren&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;&amp;quot;&lt;/code&gt; handles string delimiters in balanced pairs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Structural operations:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Operation&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Slurp forward&lt;/td&gt;
+&lt;td&gt;Absorb the next s-expression into the current list&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Slurp backward&lt;/td&gt;
+&lt;td&gt;Absorb the previous s-expression&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Barf forward&lt;/td&gt;
+&lt;td&gt;Eject the last s-expression from the current list&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Barf backward&lt;/td&gt;
+&lt;td&gt;Eject the first s-expression&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Wrap&lt;/td&gt;
+&lt;td&gt;Wrap the next s-expression in parentheses&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Splice&lt;/td&gt;
+&lt;td&gt;Remove the enclosing parentheses&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Raise&lt;/td&gt;
+&lt;td&gt;Replace the enclosing list with the current s-expression&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Toggle paredit on or off with &lt;code&gt;,paredit&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Themes&lt;span class="hx:absolute hx:-mt-20" id="themes"&gt;&lt;/span&gt;
+&lt;a href="#themes" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Switch between built-in themes or load a custom theme file:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;pre&gt;&lt;code&gt;,theme dark
+,theme light
+,theme none
+,theme /path/to/my-theme.scm&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;You can also set the default theme with the &lt;code&gt;BILK_THEME&lt;/code&gt; environment variable.&lt;/p&gt;
+&lt;p&gt;Settings (theme, paredit mode) persist across sessions in &lt;code&gt;~/.bilk/config&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Keyboard shortcuts&lt;span class="hx:absolute hx:-mt-20" id="keyboard-shortcuts"&gt;&lt;/span&gt;
+&lt;a href="#keyboard-shortcuts" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Key&lt;/th&gt;
+&lt;th&gt;Action&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-A&lt;/td&gt;
+&lt;td&gt;Move to start of line&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-E&lt;/td&gt;
+&lt;td&gt;Move to end of line&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-B / Ctrl-F&lt;/td&gt;
+&lt;td&gt;Move backward/forward one character&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Alt-Left / Alt-Right&lt;/td&gt;
+&lt;td&gt;Move backward/forward one word&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-K&lt;/td&gt;
+&lt;td&gt;Kill from cursor to end of line&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-U&lt;/td&gt;
+&lt;td&gt;Kill from cursor to start of line&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-W&lt;/td&gt;
+&lt;td&gt;Kill previous word&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Up / Down&lt;/td&gt;
+&lt;td&gt;Navigate history&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Tab&lt;/td&gt;
+&lt;td&gt;Complete identifier or command&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ctrl-D&lt;/td&gt;
+&lt;td&gt;Exit (on empty line)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>LSP Server</title><link>https://bilk-scheme.github.io/docs/tools/lsp/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/lsp/</guid><description>
+&lt;p&gt;Bilk Scheme includes a Language Server Protocol (LSP) server for editor integration.&lt;/p&gt;
+&lt;h2&gt;Starting the server&lt;span class="hx:absolute hx:-mt-20" id="starting-the-server"&gt;&lt;/span&gt;
+&lt;a href="#starting-the-server" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk lsp&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;By default the server communicates over stdin/stdout. To use a TCP socket:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk lsp --port &lt;span class="m"&gt;5007&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Capabilities&lt;span class="hx:absolute hx:-mt-20" id="capabilities"&gt;&lt;/span&gt;
+&lt;a href="#capabilities" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Feature&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Diagnostics&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Real-time compilation and macro-expansion errors as you type&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Hover&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Shows binding type (variable, core form, macro, unbound)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Completion&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Symbol name completion with kind classification&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Go to definition&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Jump to the binding site of any identifier&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Find references&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Locate all uses of a binding&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Document symbols&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;List all top-level definitions in the current file&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Semantic tokens&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Full semantic highlighting (keywords, strings, numbers, comments, variables, functions, parameters)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;Editor configuration&lt;span class="hx:absolute hx:-mt-20" id="editor-configuration"&gt;&lt;/span&gt;
+&lt;a href="#editor-configuration" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;See &lt;a href="https://bilk-scheme.github.io/docs/getting-started/#editor-setup"&gt;Getting Started — Editor setup&lt;/a&gt;
+for VS Code, Emacs, and Neovim configuration examples.&lt;/p&gt;
+&lt;p&gt;The key is to point your editor&amp;rsquo;s LSP client at &lt;code&gt;bilk lsp&lt;/code&gt; as the server
+command for Scheme files.&lt;/p&gt;
+&lt;h2&gt;How it works&lt;span class="hx:absolute hx:-mt-20" id="how-it-works"&gt;&lt;/span&gt;
+&lt;a href="#how-it-works" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The LSP server performs a full recompilation on each document change. This gives
+accurate diagnostics for syntax errors, undefined variables, arity mismatches,
+and macro expansion failures.&lt;/p&gt;
+&lt;p&gt;Semantic tokens classify every token in the file, enabling editors to provide
+richer highlighting than regex-based grammars. Token types include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;keyword&lt;/code&gt; — special forms (&lt;code&gt;define&lt;/code&gt;, &lt;code&gt;if&lt;/code&gt;, &lt;code&gt;lambda&lt;/code&gt;, etc.)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;function&lt;/code&gt; — procedure references&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;parameter&lt;/code&gt; — function parameters&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;variable&lt;/code&gt; — other bindings&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;string&lt;/code&gt;, &lt;code&gt;number&lt;/code&gt;, &lt;code&gt;comment&lt;/code&gt; — literals&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Token modifiers include &lt;code&gt;definition&lt;/code&gt; (for binding sites) and &lt;code&gt;readonly&lt;/code&gt; (for
+immutable bindings).&lt;/p&gt;</description></item><item><title>Debugger</title><link>https://bilk-scheme.github.io/docs/tools/debugger/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/debugger/</guid><description>
+&lt;p&gt;Bilk Scheme includes a Debug Adapter Protocol (DAP) server for step-through debugging.&lt;/p&gt;
+&lt;h2&gt;Starting a debug session&lt;span class="hx:absolute hx:-mt-20" id="starting-a-debug-session"&gt;&lt;/span&gt;
+&lt;a href="#starting-a-debug-session" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk debug program.scm&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;By default the DAP server communicates over stdin/stdout. To use a TCP socket:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk debug program.scm --port &lt;span class="m"&gt;5008&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Features&lt;span class="hx:absolute hx:-mt-20" id="features"&gt;&lt;/span&gt;
+&lt;a href="#features" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3&gt;Breakpoints&lt;span class="hx:absolute hx:-mt-20" id="breakpoints"&gt;&lt;/span&gt;
+&lt;a href="#breakpoints" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Set breakpoints at specific line numbers. Breakpoints are verified when first
+encountered during execution.&lt;/p&gt;
+&lt;h3&gt;Stepping&lt;span class="hx:absolute hx:-mt-20" id="stepping"&gt;&lt;/span&gt;
+&lt;a href="#stepping" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Mode&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Step in&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Stop at the next call, descending into functions&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Step over&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Stop at the next call at the same or lower depth&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Step out&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Stop when returning to the caller&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Continue&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Resume execution until the next breakpoint&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;Pause&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Break at the next call site&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Stack inspection&lt;span class="hx:absolute hx:-mt-20" id="stack-inspection"&gt;&lt;/span&gt;
+&lt;a href="#stack-inspection" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;View the full call stack with procedure name, file, line, and column for each
+frame.&lt;/p&gt;
+&lt;h3&gt;Variable inspection&lt;span class="hx:absolute hx:-mt-20" id="variable-inspection"&gt;&lt;/span&gt;
+&lt;a href="#variable-inspection" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Inspect local and global variables in each stack frame. Composite values
+(pairs, vectors, records) can be expanded for hierarchical inspection.&lt;/p&gt;
+&lt;h3&gt;Expression evaluation&lt;span class="hx:absolute hx:-mt-20" id="expression-evaluation"&gt;&lt;/span&gt;
+&lt;a href="#expression-evaluation" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Evaluate arbitrary Scheme expressions in the context of any stack frame or the
+global environment.&lt;/p&gt;
+&lt;h2&gt;Editor integration&lt;span class="hx:absolute hx:-mt-20" id="editor-integration"&gt;&lt;/span&gt;
+&lt;a href="#editor-integration" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Any DAP-compatible editor can connect to the Bilk Scheme debugger:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;VS Code&lt;/strong&gt; — use a generic DAP extension or configure &lt;code&gt;launch.json&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Emacs&lt;/strong&gt; — use &lt;a href="https://github.com/svaante/dape"target="_blank" rel="noopener"&gt;dape&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Neovim&lt;/strong&gt; — use &lt;a href="https://github.com/mfussenegger/nvim-dap"target="_blank" rel="noopener"&gt;nvim-dap&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Configure the debug adapter to run &lt;code&gt;bilk debug &amp;lt;file&amp;gt;&lt;/code&gt; as the launch command.&lt;/p&gt;</description></item><item><title>Profiler</title><link>https://bilk-scheme.github.io/docs/tools/profiler/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/profiler/</guid><description>
+&lt;p&gt;Bilk Scheme includes a runtime profiler that instruments function calls and produces
+reports in multiple formats.&lt;/p&gt;
+&lt;h2&gt;Running the profiler&lt;span class="hx:absolute hx:-mt-20" id="running-the-profiler"&gt;&lt;/span&gt;
+&lt;a href="#running-the-profiler" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk profile program.scm&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Output formats&lt;span class="hx:absolute hx:-mt-20" id="output-formats"&gt;&lt;/span&gt;
+&lt;a href="#output-formats" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Specify the format with &lt;code&gt;--format&lt;/code&gt;:&lt;/p&gt;
+&lt;h3&gt;Text (default)&lt;span class="hx:absolute hx:-mt-20" id="text-default"&gt;&lt;/span&gt;
+&lt;a href="#text-default" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk profile program.scm --format text&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Prints a flat table to stderr sorted by self-time, with columns for self%,
+total time, self time, call count, procedure name, and source location.&lt;/p&gt;
+&lt;h3&gt;Flame graph&lt;span class="hx:absolute hx:-mt-20" id="flame-graph"&gt;&lt;/span&gt;
+&lt;a href="#flame-graph" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk profile program.scm --format flamegraph &amp;gt; profile.svg&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Produces a self-contained SVG with embedded JavaScript for interactive
+exploration. Open it in a browser to click and zoom into hot call stacks.&lt;/p&gt;
+&lt;h3&gt;Chrome trace&lt;span class="hx:absolute hx:-mt-20" id="chrome-trace"&gt;&lt;/span&gt;
+&lt;a href="#chrome-trace" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk profile program.scm --format trace &amp;gt; profile.json&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Produces Chrome Trace Event JSON format. Load it in &lt;code&gt;chrome://tracing&lt;/code&gt; or
+&lt;a href="https://ui.perfetto.dev"target="_blank" rel="noopener"&gt;Perfetto&lt;/a&gt; for time-series analysis.&lt;/p&gt;
+&lt;h2&gt;Metrics&lt;span class="hx:absolute hx:-mt-20" id="metrics"&gt;&lt;/span&gt;
+&lt;a href="#metrics" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;For each procedure, the profiler tracks:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Metric&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;call_count&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Number of invocations&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;total_time&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Wall-clock seconds including time in callees&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;strong&gt;self_time&lt;/strong&gt;&lt;/td&gt;
+&lt;td&gt;Wall-clock seconds excluding time in callees&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;Typical workflow&lt;span class="hx:absolute hx:-mt-20" id="typical-workflow"&gt;&lt;/span&gt;
+&lt;a href="#typical-workflow" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Run with &lt;code&gt;--format text&lt;/code&gt; to identify the hottest procedures&lt;/li&gt;
+&lt;li&gt;Generate a flame graph to understand call-stack context&lt;/li&gt;
+&lt;li&gt;Optimize the hot path&lt;/li&gt;
+&lt;li&gt;Re-profile to confirm the improvement&lt;/li&gt;
+&lt;/ol&gt;</description></item><item><title>Package Manager</title><link>https://bilk-scheme.github.io/docs/tools/packages/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/packages/</guid><description>
+&lt;p&gt;Bilk Scheme includes a local package manager for installing and managing Scheme
+libraries.&lt;/p&gt;
+&lt;h2&gt;Commands&lt;span class="hx:absolute hx:-mt-20" id="commands"&gt;&lt;/span&gt;
+&lt;a href="#commands" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg init [NAME]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Initialize a new project with &lt;code&gt;package.scm&lt;/code&gt; (default name: current directory)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg install [PATH]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Install a package from a directory (default: &lt;code&gt;.&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg list&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List all installed packages and versions&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg info &amp;lt;name&amp;gt; [version]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Show package details&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg remove &amp;lt;name&amp;gt; &amp;lt;version&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Remove a specific package version&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg lock&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Resolve dependencies and write a lockfile&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg why &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Explain why a package is in the dependency tree&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg fetch &amp;lt;name&amp;gt; [version]&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Download a package from a repository&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg search &amp;lt;query&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Search repositories for packages&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Repository management&lt;span class="hx:absolute hx:-mt-20" id="repository-management"&gt;&lt;/span&gt;
+&lt;a href="#repository-management" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;p&gt;Repositories are remote sources of packages. Manage them with &lt;code&gt;bilk pkg repo&lt;/code&gt;:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Command&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg repo add &amp;lt;name&amp;gt; &amp;lt;url&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Add a package repository&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg repo list&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;List configured repositories&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg repo remove &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Remove a repository&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;bilk pkg repo update &amp;lt;name&amp;gt;&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Update a repository&amp;rsquo;s package index&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;Package descriptor&lt;span class="hx:absolute hx:-mt-20" id="package-descriptor"&gt;&lt;/span&gt;
+&lt;a href="#package-descriptor" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Every package has a &lt;code&gt;package.scm&lt;/code&gt; file in its root directory:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-scheme" data-lang="scheme"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;my-package&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;version&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;1.0.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;description&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;A useful library&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;license&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;MIT&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;depends&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;other-package&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;version&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;&amp;gt;=0.5.0&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;libraries&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;((&lt;/span&gt;&lt;span class="nf"&gt;name&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;mylib&lt;/span&gt; &lt;span class="nv"&gt;utils&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nf"&gt;path&lt;/span&gt; &lt;span class="s"&gt;&amp;#34;src/utils.sld&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;))))&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Installing a package&lt;span class="hx:absolute hx:-mt-20" id="installing-a-package"&gt;&lt;/span&gt;
+&lt;a href="#installing-a-package" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;From the package directory:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk pkg install&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Or from another location:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk pkg install /path/to/package&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Packages are installed to &lt;code&gt;~/.bilk/packages/&amp;lt;name&amp;gt;/&amp;lt;version&amp;gt;/&lt;/code&gt;.&lt;/p&gt;
+&lt;h2&gt;Dependency resolution&lt;span class="hx:absolute hx:-mt-20" id="dependency-resolution"&gt;&lt;/span&gt;
+&lt;a href="#dependency-resolution" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;When a package declares dependencies, Bilk Scheme resolves them using semantic
+versioning. The resolver picks the latest installed version that satisfies each
+constraint and detects circular dependencies.&lt;/p&gt;
+&lt;h2&gt;Virtual environments&lt;span class="hx:absolute hx:-mt-20" id="virtual-environments"&gt;&lt;/span&gt;
+&lt;a href="#virtual-environments" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Virtual environments isolate project-specific libraries:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk venv myenv&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;This creates a directory with a &lt;code&gt;lib/&lt;/code&gt; folder for local libraries and a
+&lt;code&gt;bilk-venv.cfg&lt;/code&gt; marker file.&lt;/p&gt;
+&lt;p&gt;Activate a virtual environment by setting:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;BILK_VENV&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;./myenv&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;When activated, the &lt;code&gt;lib/&lt;/code&gt; directory is prepended to the library search path,
+so libraries installed there take precedence over system-wide packages.&lt;/p&gt;
+&lt;h2&gt;Environment variables&lt;span class="hx:absolute hx:-mt-20" id="environment-variables"&gt;&lt;/span&gt;
+&lt;a href="#environment-variables" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Variable&lt;/th&gt;
+&lt;th&gt;Description&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;BILK_HOME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Override for Bilk Scheme home directory (default: &lt;code&gt;~/.bilk/&lt;/code&gt;)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;BILK_PATH&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Additional library search directories (colon-separated)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;BILK_VENV&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Path to active virtual environment&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;</description></item><item><title>Build System</title><link>https://bilk-scheme.github.io/docs/tools/build/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://bilk-scheme.github.io/docs/tools/build/</guid><description>
+&lt;p&gt;Bilk Scheme includes a build system that compiles libraries, manages dependencies,
+and watches for changes.&lt;/p&gt;
+&lt;h2&gt;Commands&lt;span class="hx:absolute hx:-mt-20" id="commands"&gt;&lt;/span&gt;
+&lt;a href="#commands" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build &lt;span class="c1"&gt;# build all project libraries&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build --clean &lt;span class="c1"&gt;# remove all .fasl cache files&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build --dry-run &lt;span class="c1"&gt;# show what would be built&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build --verbose &lt;span class="c1"&gt;# verbose output&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build --watch &lt;span class="c1"&gt;# rebuild on source changes (Ctrl-C to stop)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build --graph &lt;span class="c1"&gt;# emit Graphviz DOT dependency graph&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;How it works&lt;span class="hx:absolute hx:-mt-20" id="how-it-works"&gt;&lt;/span&gt;
+&lt;a href="#how-it-works" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;The build system:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Auto-discovers all &lt;code&gt;.sld&lt;/code&gt; library files in the project&lt;/li&gt;
+&lt;li&gt;Resolves inter-library dependencies&lt;/li&gt;
+&lt;li&gt;Detects staleness (missing &lt;code&gt;.fasl&lt;/code&gt;, source newer than cache, dependency changed)&lt;/li&gt;
+&lt;li&gt;Compiles stale libraries to &lt;code&gt;.fasl&lt;/code&gt; bytecode&lt;/li&gt;
+&lt;li&gt;Caches the results for fast subsequent loads&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;FASL caching&lt;span class="hx:absolute hx:-mt-20" id="fasl-caching"&gt;&lt;/span&gt;
+&lt;a href="#fasl-caching" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Compiled libraries are cached as &lt;code&gt;.fasl&lt;/code&gt; files alongside their &lt;code&gt;.sld&lt;/code&gt; sources.
+Cache invalidation is mtime-based: if the source or any dependency is newer
+than the &lt;code&gt;.fasl&lt;/code&gt;, the library is recompiled.&lt;/p&gt;
+&lt;h2&gt;Watch mode&lt;span class="hx:absolute hx:-mt-20" id="watch-mode"&gt;&lt;/span&gt;
+&lt;a href="#watch-mode" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build --watch&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Monitors source directories for changes and automatically rebuilds stale
+libraries. When used alongside the REPL, rebuilt libraries are reloaded
+automatically.&lt;/p&gt;
+&lt;h2&gt;Dependency graph&lt;span class="hx:absolute hx:-mt-20" id="dependency-graph"&gt;&lt;/span&gt;
+&lt;a href="#dependency-graph" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Visualize library dependencies as a Graphviz DOT graph:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk build --graph &lt;span class="p"&gt;|&lt;/span&gt; dot -Tsvg -o deps.svg&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2&gt;Ahead-of-time compilation&lt;span class="hx:absolute hx:-mt-20" id="ahead-of-time-compilation"&gt;&lt;/span&gt;
+&lt;a href="#ahead-of-time-compilation" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;For standalone programs (not libraries), use &lt;code&gt;bilk compile&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk compile program.scm -o program.fasl &lt;span class="c1"&gt;# bytecode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk compile program.scm --exe -o program &lt;span class="c1"&gt;# native executable&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;See &lt;a href="https://bilk-scheme.github.io/docs/getting-started/#compiling-programs"&gt;Getting Started — Compiling programs&lt;/a&gt;
+for details.&lt;/p&gt;
+&lt;h2&gt;Testing&lt;span class="hx:absolute hx:-mt-20" id="testing"&gt;&lt;/span&gt;
+&lt;a href="#testing" class="subheading-anchor" aria-label="Permalink for this section"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Bilk Scheme also includes a test runner:&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk &lt;span class="nb"&gt;test&lt;/span&gt; &lt;span class="c1"&gt;# discover and run all tests&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk &lt;span class="nb"&gt;test&lt;/span&gt; --verbose &lt;span class="c1"&gt;# print file names during execution&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;bilk &lt;span class="nb"&gt;test&lt;/span&gt; test/foo.scm &lt;span class="c1"&gt;# run a specific test file&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copy code"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;The test runner auto-discovers files matching &lt;code&gt;test-*.scm&lt;/code&gt; or &lt;code&gt;*-test.scm&lt;/code&gt; in
+the &lt;code&gt;test/&lt;/code&gt; directory, builds project libraries first, then runs each test as
+an isolated subprocess.&lt;/p&gt;</description></item></channel></rss>
